@@ -1,0 +1,240 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.navbar_outer_div{
+    width: 100%;
+    min-height: 100px;
+    background-color: rgba(5, 44, 83);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.name{
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.menu_toggle{
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.menu_toggle span{
+    display: block;
+    width: 26px;
+    height: 3px;
+    background-color: white;
+    border-radius: 999px;
+}
+
+.navbar_links_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    color: aliceblue;
+    margin-right: 30px;
+    flex-wrap: wrap;
+}
+
+.primary_links_row{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+}
+
+.navlinks{
+    color: aliceblue;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.navlinks_active{
+    color: aliceblue;
+    font-size: 18px;
+    font-weight: 500;
+    text-decoration: none;
+    border-bottom: 2px solid white;
+}
+
+.navlinks:hover{
+    color: rgb(235, 171, 33);
+    font-size: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease-in-out;
+}
+
+.login_register_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: rgba(15, 61, 110);
+    padding: 13px;
+    border-radius: 6px;
+}
+
+.logout_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 2px solid gray;
+    padding: 10px;
+}
+
+.ask_question_div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(235, 171, 33);
+    padding: 13px;
+    border-radius: 6px;
+}
+
+.ask_question_div:hover{
+    background-color: rgb(241, 67, 14);
+    color: aliceblue;
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 992px){
+    .navbar_outer_div{
+        /* min-height: auto; */
+        padding: 18px 20px;
+        justify-content: center;
+        gap: 18px;
+    }
+
+    .navbar_links_div{
+        width: 100%;
+        margin-right: 0;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px){
+    .navbar_outer_div{
+        padding: 16px;
+        gap: 16px;
+        justify-content: space-between;
+    }
+
+    .name{
+        margin-left: 0;
+        font-size: 26px;
+    }
+
+    .navbar_links_div{
+        width: 100%;
+        gap: 16px;
+    }
+
+    .primary_links_row,
+    .login_register_div,
+    .ask_question_div{
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px){
+    .navbar_outer_div{
+        padding: 14px 12px;
+        align-items: center;
+    }
+
+    .name{
+        font-size: 22px;
+    }
+
+    .menu_toggle{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        padding: 8px;
+    }
+
+    .navbar_links_div{
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+        margin-right: 0;
+        padding-top: 8px;
+    }
+
+    .navbar_links_open{
+        display: flex;
+    }
+
+    .primary_links_row{
+        width: 100%;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+    .primary_links_row .navlinks,
+    .primary_links_row .navlinks_active{
+        flex: 1;
+        text-align: center;
+    }
+
+    .navlinks,
+    .navlinks_active{
+        font-size: 16px;
+    }
+
+    .navlinks:hover{
+        font-size: 16px;
+    }
+
+    .login_register_div{
+        padding: 10px;
+        gap: 8px;
+        width: 100%;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+    }
+
+    .logout_div{
+        border-left: 2px solid gray;
+        border-top: none;
+        width: auto;
+        padding: 0 0 0 10px;
+    }
+
+    .login_register_div .navlinks,
+    .login_register_div .navlinks_active,
+    .logout_div .navlinks,
+    .logout_div .navlinks_active{
+        text-align: center;
+    }
+
+    .ask_question_div{
+        padding: 10px;
+        width: 100%;
+    }
+}
+
+.username_p{
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
