@@ -1,6 +1,6 @@
 export const PostQuestion = async (askQuestionData) => {
     try{
-        let res = await fetch("https://votesphere-gfor.onrender.com/api/questions/createquestion", {
+        let res = await fetch("https://bobtail-t-shirt-siesta.ngrok-free.dev/api/questions/createquestion", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

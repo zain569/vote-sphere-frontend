@@ -1,6 +1,6 @@
 export const GetMyQuestions = async () => {
     try {
-        let response = await fetch("https://votesphere-gfor.onrender.com/api/questions/myquestions", {
+        let response = await fetch("https://bobtail-t-shirt-siesta.ngrok-free.dev/api/questions/myquestions", {
             method: "GET",
             credentials: "include"
         });

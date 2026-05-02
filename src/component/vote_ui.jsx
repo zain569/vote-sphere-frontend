@@ -24,9 +24,13 @@ function Vote_UI() {
                 const data = await GetQuestion();
                 setQuestionData(Array.isArray(data) ? data : []);
 
+                const totalQuestions = Array.isArray(data) ? data.length : 0;
+                console.log(`Fetched ${totalQuestions} questions from the server.`);
+
                 const user = JSON.parse(localStorage.getItem("user"));
                 if (user) {
                     setUserId(user.id);
+                    console.log(data);
                 }
             } catch (error) {
                 setFetchError(error?.response?.data?.message || "Unable to load questions right now.");
@@ -45,11 +49,11 @@ function Vote_UI() {
     }, []);
 
     const hasVoted = (question) => {
-        return question.votes?.some((vote) => vote.userId === userId);
+        return question.hasvoted?.some((vote) => String(vote.userId) === String(userId));
     };
 
     const getUserVote = (question) => {
-        return question.votes?.find((vote) => vote.userId === userId);
+        return question.hasvoted?.find((vote) => String(vote.userId) === String(userId));
     };
 
     const getPercentage = (optionVotes, totalVotes) => {
@@ -73,25 +77,25 @@ function Vote_UI() {
 
         try {
             await axios.post(
-                "https://votesphere-gfor.onrender.com/api/questions/votequestion",
+                "https://bobtail-t-shirt-siesta.ngrok-free.dev/api/questions/votequestion",
                 { questionId, optionId },
                 { withCredentials: true }
             );
 
             setQuestionData((prev) =>
                 prev.map((question) => {
-                    if (question._id !== questionId) {
+                    if (question.id !== questionId) {
                         return question;
                     }
 
                     return {
                         ...question,
                         options: question.options.map((option) =>
-                            option._id === optionId
+                            option.id === optionId
                                 ? { ...option, votes: option.votes + 1 }
                                 : option
                         ),
-                        votes: [...(question.votes || []), { userId, optionId }]
+                        hasvoted: [...(question.hasvoted || []), { userId, optionId }]
                     };
                 })
             );
@@ -109,22 +113,22 @@ function Vote_UI() {
         const totalVotes = getTotalVotes(question);
         const voted = hasVoted(question);
         const userVote = getUserVote(question);
-        const activeVoteOption = submittingVote[question._id];
+        const activeVoteOption = submittingVote[question.id];
 
         return (
             <div className={styles.options_group}>
                 {!voted ? (
                     <div className={styles.button_grid}>
                         {question.options.map((option) => {
-                            const isLoading = activeVoteOption === option._id;
+                            const isLoading = activeVoteOption === option.id;
                             const isQuestionLoading = Boolean(activeVoteOption);
 
                             return (
                                 <button
-                                    key={option._id}
+                                    key={option.id}
                                     type="button"
                                     className={`${styles.option_button} ${isLoading ? styles.option_button_loading : ""}`}
-                                    onClick={() => handleVote(question._id, option._id)}
+                                    onClick={() => handleVote(question.id, option.id)}
                                     disabled={isQuestionLoading}
                                     aria-busy={isLoading}
                                 >
@@ -138,10 +142,10 @@ function Vote_UI() {
                     <div className={styles.results_container}>
                         {question.options.map((option) => {
                             const percent = getPercentage(option.votes, totalVotes);
-                            const isSelected = userVote?.optionId === option._id;
+                            const isSelected = userVote?.optionId === option.id;
 
                             return (
-                                <div className={styles.result_row} key={option._id}>
+                                <div className={styles.result_row} key={option.id}>
                                     <div className={styles.result_header}>
                                         <span className={styles.result_label}>
                                             {option.text}
@@ -162,8 +166,8 @@ function Vote_UI() {
                     </div>
                 )}
 
-                {voteError[question._id] && (
-                    <p className={styles.error_message}>{voteError[question._id]}</p>
+                {voteError[question.id] && (
+                    <p className={styles.error_message}>{voteError[question.id]}</p>
                 )}
             </div>
         );
@@ -226,7 +230,7 @@ function Vote_UI() {
             )}
 
             {hasFetchedOnce && !isFetching && !fetchError && remainingQuestions.map((question) => (
-                <div className={styles.question_card} key={question._id}>
+                <div className={styles.question_card} key={question.id}>
                     <div className={styles.card_header}>
                         <span className={styles.card_badge_secondary}>Live Vote</span>
                         <h3>{question.question}</h3>

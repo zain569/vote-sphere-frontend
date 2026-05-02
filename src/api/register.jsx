@@ -1,6 +1,6 @@
 export const registerUser = async (userData) => {
     try{
-        let res = await fetch("https://votesphere-gfor.onrender.com/api/auth/register",{
+        let res = await fetch("https://bobtail-t-shirt-siesta.ngrok-free.dev/api/auth/register",{
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

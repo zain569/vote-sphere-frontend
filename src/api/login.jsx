@@ -1,6 +1,6 @@
 export const loginUser = async (loginData) => {
     try {
-        let res = await fetch("https://votesphere-gfor.onrender.com/api/auth/login", {
+        let res = await fetch("https://bobtail-t-shirt-siesta.ngrok-free.dev/api/auth/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
